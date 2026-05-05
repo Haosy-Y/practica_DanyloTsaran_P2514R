@@ -1,0 +1,100 @@
+1 The_Shawshank_Redemption Prison_Drama 2:22:25 R
+2 The_Godfather Psychological_Drama 2:55:13 R
+3 The_Dark_Knight Action_Epic  2:32:51 PG-13
+4 The_Godfather_II Tragedy 3:22:11 R
+5 12_Angry_Men Legal_Drama 1:39:57 Approved  
+6 The_Lord_of_the_Rings:The_Return_of_the_King Action_Epic 3:21:08 PG-13
+7 Schindler's_List Docudrama 3:15:41 R
+8 The_Lord_of_the Rings:_The_Fellowship_of_the_Ring Action_Epic 2:58:37 PG-13
+9 Pulp_Fiction Dark_Comedy 2:34:37 R
+10 The_Good,the_Bad_and_the_Ugly Action_Epic 2:58:18 R
+11 The_Lord_of_the_Rings:_The_Two_Towers Action_Epic 2:59:38 PG-13
+12 Forrest_Gump Period_Drama 2:22:58 PG-13
+13 Fight_Club Dark_Comedy 2:19:43 R
+14 Inception Sci-Fi_Thriller 2:28:00 PG-13
+15 Star_Wars:_Episode_V_-_The_Empire_Strikes_Back Space_Opera 2:04:00 PG
+16 The_Matrix Sci-Fi_Action 2:16:00 R
+17 GoodFellas Crime_Drama 2:25:00 R
+18 Interstellar Sci-Fi_Drama 2:49:00 PG-13
+19 One_Flew_Over_the_Cuckoo's_Nest Drama 2:13:00 R
+20 Seven Psychological_Thriller 2:07:00 R
+21 It's_a_Wonderful_Life Fantasy_Drama 2:10:00 PG
+22 The_Silence_of_the_Lambs Psychological_Thriller 1:58:00 R
+23 Seven_Samurai Action_Epic 3:27:00 Not_Rated
+24 Saving_Private_Ryan War_Drama 2:49:00 R
+25 The_Green_Mile Fantasy_Drama 3:09:00 R
+26 City_of_God Crime_Drama 2:10:00 R
+27 Life_Is_Beautiful War_Drama 1:56:00 PG-13
+28 Terminator_2:_Judgment_Day Sci-Fi_Action 2:17:00 R
+29 Back_to_the_Future Sci-Fi_Comedy 1:56:00 PG
+30 Star_Wars:_Episode_IV_-_A_New_Hope Space_Opera 2:01:00 PG
+31 Spirited_Away Fantasy_Animation 2:04:00 PG
+32 The_Pianist War_Drama 2:30:00 R
+33 Gladiator Action_Epic 2:35:00 R
+34 Parasite Dark_Comedy 2:12:00 R
+35 Kill_Bill:_The_Whole_Bloody_Affair Action_Thriller 4:13:00 Not_Rated
+36 Grave_of_the_Fireflies War_Animation 1:28:00 Not_Rated
+37 Psycho Psychological_Thriller 1:49:00 R
+38 The_Lion_King Animation_Musical 1:28:00 G
+39 Harakiri Samurai_Drama 2:13:00 Not_Rated
+40 The_Departed Crime_Thriller 2:31:00 R
+41 Whiplash Psychological_Drama 1:46:00 R
+42 The_Prestige Mystery_Thriller 2:10:00 PG-13
+43 American_History_X Crime_Drama 1:59:00 R
+44 Leon:_The_Professional Action_Thriller 1:50:00 R
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
