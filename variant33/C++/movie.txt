@@ -5,7 +5,7 @@
 5 12_Angry_Men Legal_Drama 1:39:57 Approved  
 6 The_Lord_of_the_Rings:The_Return_of_the_King Action_Epic 3:21:08 PG-13
 7 Schindler's_List Docudrama 3:15:41 R
-8 The_Lord_of_the Rings:_The_Fellowship_of_the_Ring Action_Epic 2:58:37 PG-13
+8 The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring Action_Epic 2:58:37 PG-13
 9 Pulp_Fiction Dark_Comedy 2:34:37 R
 10 The_Good,the_Bad_and_the_Ugly Action_Epic 2:58:18 R
 11 The_Lord_of_the_Rings:_The_Two_Towers Action_Epic 2:59:38 PG-13
