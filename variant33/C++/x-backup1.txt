@@ -149,31 +149,3 @@
 362 48 2026-05-10 19:00 3 250
 363 15 2026-05-10 19:30 4 280
 364 50 2026-05-10 20:00 1 280
-
-
-void printFilms(const vector<Films>& films) {
-    if (films.empty()) {
-        cout << "Список фильмов пуст.\n";
-        return;
-    }
-
-    cout << "\n--- Все фильмы ---\n";
-    for (size_t i = 0; i < films.size(); i++) {
-        cout << films[i].id << " " << films[i].name << " " << films[i].genre
-             << " " << films[i].duration << " " << films[i].agelimit << "\n";
-    }
-}
-
-void printSessions(const vector<Sessions>& sessions) {
-    if (sessions.empty()) {
-        cout << "Список сеансов пуст.\n";
-        return;
-    }
-
-    cout << "\n--- Все сеансы ---\n";
-    for (size_t i = 0; i < sessions.size(); i++) {
-        cout << sessions[i].sid << " " << sessions[i].filmId << " " << sessions[i].date
-             << " " << sessions[i].time << " " << sessions[i].hallId
-             << " " << sessions[i].price << "\n";
-    }
-}
