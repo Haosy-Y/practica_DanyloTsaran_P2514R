@@ -39,7 +39,7 @@ void addFilm(vector<Films> &films, Films film) {
   getline(cin >> ws, line);
 
   regex fullPattern(
-      R"(^([0-9]+)\s+([A-Za-z_]+)\s+([A-Za-z_]+)\s+([0-9]{1,2}:[0-9]{2}:[0-9]{2})\s+(G|PG|PG-13|R|NC-17)$)");
+      R"(^([0-9]+)\s+(\S+)\s+(\S+)\s+([0-9]{1,2}:[0-9]{2}:[0-9]{2})\s+(G|PG|PG-13|R|NC-17)$)");
   smatch match;
   if (!regex_match(line, match, fullPattern)) {
     cout << "Фильм не добавлен - неверный формат" << endl;
@@ -60,6 +60,7 @@ void addFilm(vector<Films> &films, Films film) {
     cout << "Фильм не добавлен - неверный формат" << endl;
     return;
   }
+  if (any_of(films.begin(), films.end(), [&](const Films &f) { return f.id == film.id; })) { cout << "Фильм не добавлен - id уже существует" << endl; return; }
   cout << "Фильм добавлен" << endl;
   films.push_back(film);
 }
@@ -86,8 +87,49 @@ void addSession(vector<Sessions> &sessions, Sessions session) {
   session.hallId = stoi(match[5].str());
   session.price = stoi(match[6].str());
 
+  if (any_of(sessions.begin(), sessions.end(), [&](const Sessions &s) { return s.sid == session.sid; })) { cout << "Сеанс не добавлен - sid уже существует" << endl; return; }
   cout << "Сеанс добавлен" << endl;
   sessions.push_back(session);
+}
+
+void deleteFilm(vector<Films> &films) {
+  cout << "Введите название фильма для удаления: ";
+  string filmName;
+  cin >> filmName;
+
+  auto it = remove_if(films.begin(), films.end(),
+                      [&](const Films &film) { return film.name == filmName; });
+
+  if (it == films.end()) {
+    cout << "Фильм с таким названием не найден" << endl;
+    return;
+  }
+
+  films.erase(it, films.end());
+  cout << "Фильм удален" << endl;
+}
+
+void deleteSession(vector<Sessions> &sessions) {
+  cout << "Введите номер сеанса: ";
+  int sidToDelete;
+  if (!(cin >> sidToDelete)) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Неверно, попробуйте иначе." << endl;
+    return;
+  }
+
+  auto it = remove_if(sessions.begin(), sessions.end(),
+                      [&](const Sessions &s) { return s.sid == sidToDelete; });
+  int removed = (int)(sessions.end() - it);
+
+  if (removed == 0) {
+    cout << "Неверно, попробуйте иначе." << endl;
+    return;
+  }
+
+  sessions.erase(it, sessions.end());
+  cout << "Удалено сеансов: " << removed << endl;
 }
 
 void runMenu(vector<Films> &films, vector<Sessions> &sessions) {
@@ -103,6 +145,8 @@ void runMenu(vector<Films> &films, vector<Sessions> &sessions) {
     cout << "2. Показать все сеансы\n";
     cout << "3. Добавить новый фильм\n";
     cout << "4. Добавить новый сеанс\n";
+    cout << "5. Удалить фильм по названию\n";
+    cout << "6. Удалить сеанс по порядковому номеру\n";
     cout << "0. Выход\n";
     cout << "----------------------------------------\n";
     cout << "Ваш выбор: ";
@@ -110,7 +154,7 @@ void runMenu(vector<Films> &films, vector<Sessions> &sessions) {
     if (!(cin >> choice)) {
       cin.clear();
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      cout << "Неверный выбор. Введите число от 0 до 4.\n";
+      cout << "Неверный выбор. Введите число от 0 до 6.\n";
       continue;
     }
 
@@ -127,11 +171,17 @@ void runMenu(vector<Films> &films, vector<Sessions> &sessions) {
     case 4:
       addSession(sessions, session);
       break;
+    case 5:
+      deleteFilm(films);
+      break;
+    case 6:
+      deleteSession(sessions);
+      break;
     case 0:
       cout << "Выход из программы.\n";
       return;
     default:
-      cout << "Неверный выбор. Введите число от 0 до 4.\n";
+      cout << "Неверный выбор. Введите число от 0 до 6.\n";
       break;
     }
   }
