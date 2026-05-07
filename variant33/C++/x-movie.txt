@@ -1,50 +1,50 @@
-1 The_Shawshank_Redemption Prison_Drama 2:22:25 R
-2 The_Godfather Psychological_Drama 2:55:13 R
-3 The_Dark_Knight Action_Epic  2:32:51 PG-13
-4 The_Godfather_II Tragedy 3:22:11 R
-5 12_Angry_Men Legal_Drama 1:39:57 Approved  
-6 The_Lord_of_the_Rings:The_Return_of_the_King Action_Epic 3:21:08 PG-13
-7 Schindler's_List Docudrama 3:15:41 R
-8 The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring Action_Epic 2:58:37 PG-13
-9 Pulp_Fiction Dark_Comedy 2:34:37 R
-10 The_Good,the_Bad_and_the_Ugly Action_Epic 2:58:18 R
-11 The_Lord_of_the_Rings:_The_Two_Towers Action_Epic 2:59:38 PG-13
-12 Forrest_Gump Period_Drama 2:22:58 PG-13
-13 Fight_Club Dark_Comedy 2:19:43 R
-14 Inception Sci-Fi_Thriller 2:28:43 PG-13
-15 Star_Wars:_Episode_V_-_The_Empire_Strikes_Back Space_Opera 2:04:17 PG
-16 The_Matrix Sci-Fi_Action 2:16:52 R
-17 GoodFellas Crime_Drama 2:25:09 R
-18 Interstellar Sci-Fi_Drama 2:49:31 PG-13
-19 One_Flew_Over_the_Cuckoo's_Nest Drama 2:13:44 R
-20 Seven Psychological_Thriller 2:07:28 R
-21 It's_a_Wonderful_Life Fantasy_Drama 2:10:03 PG
-22 The_Silence_of_the_Lambs Psychological_Thriller 1:58:57 R
-23 Seven_Samurai Action_Epic 3:27:12 Not_Rated
-24 Saving_Private_Ryan War_Drama 2:49:38 R
-25 The_Green_Mile Fantasy_Drama 3:09:22 R
-26 City_of_God Crime_Drama 2:10:47 R
-27 Life_Is_Beautiful War_Drama 1:56:06 PG-13
-28 Terminator_2:_Judgment_Day Sci-Fi_Action 2:17:33 R
-29 Back_to_the_Future Sci-Fi_Comedy 1:56:51 PG
-30 Star_Wars:_Episode_IV_-_A_New_Hope Space_Opera 2:01:19 PG
-31 Spirited_Away Fantasy_Animation 2:04:41 PG
-32 The_Pianist War_Drama 2:30:08 R
-33 Gladiator Action_Epic 2:35:27 R
-34 Parasite Dark_Comedy 2:12:55 R
-35 Kill_Bill:_The_Whole_Bloody_Affair Action_Thriller 4:13:14 Not_Rated
-36 Grave_of_the_Fireflies War_Animation 1:28:36 Not_Rated
-37 Psycho Psychological_Thriller 1:49:02 R
-38 The_Lion_King Animation_Musical 1:28:49 G
-39 Harakiri Samurai_Drama 2:13:21 Not_Rated
-40 The_Departed Crime_Thriller 2:31:58 R
-41 Whiplash Psychological_Drama 1:46:37 R
-42 The_Prestige Mystery_Thriller 2:10:16 PG-13
-43 American_History_X Crime_Drama 1:59:43 R
-44 Leon:_The_Professional Action_Thriller 1:50:29 R
-45 Spider-Man:_Across_the_Spider-Verse Animation_Action 2:20:11 PG
-46 Cinema_Paradiso Drama 2:54:04 PG
-47 Casablanca Romance_Drama 1:42:53 PG
-48 The_Intouchables Comedy_Drama 1:52:46 R
-49 The_Usual_Suspects Crime_Thriller 1:46:07 R
-50 Django_Unchained Western 2:45:39 R
+1|The Shawshank Redemption|Prison Drama|02:22:25|R
+2|The Godfather|Psychological Drama|02:55:13|R
+3|The Dark Knight|Action Epic|02:32:51|PG-13
+4|The Godfather II|Tragedy|03:22:11|R
+5|12 Angry Men|Legal Drama|01:39:57|Approved
+6|The Lord of the Rings The Return of the King|Action Epic|03:21:08|PG-13
+7|Schindler's List|Docudrama|03:15:41|R
+8|The Lord of the Rings The Fellowship of the Ring|Action Epic|02:58:37|PG-13
+9|Pulp Fiction|Dark Comedy|02:34:37|R
+10|The Good the Bad and the Ugly|Action Epic|02:58:18|R
+11|The Lord of the Rings The Two Towers|Action Epic|02:59:38|PG-13
+12|Forrest Gump|Period Drama|02:22:58|PG-13
+13|Fight Club|Dark Comedy|02:19:43|R
+14|Inception|Sci-Fi Thriller|02:28:43|PG-13
+15|Star Wars Episode V The Empire Strikes Back|Space Opera|02:04:17|PG
+16|The Matrix|Sci-Fi Action|02:16:52|R
+17|GoodFellas|Crime Drama|02:25:09|R
+18|Interstellar|Sci-Fi Drama|02:49:31|PG-13
+19|One Flew Over the Cuckoo's Nest|Drama|02:13:44|R
+20|Seven|Psychological Thriller|02:07:28|R
+21|It's a Wonderful Life|Fantasy Drama|02:10:03|PG
+22|The Silence of the Lambs|Psychological Thriller|01:58:57|R
+23|Seven Samurai|Action Epic|03:27:12|Not Rated
+24|Saving Private Ryan|War Drama|02:49:38|R
+25|The Green Mile|Fantasy Drama|03:09:22|R
+26|City of God|Crime Drama|02:10:47|R
+27|Life Is Beautiful|War Drama|01:56:06|PG-13
+28|Terminator 2 Judgment Day|Sci-Fi Action|02:17:33|R
+29|Back to the Future|Sci-Fi Comedy|01:56:51|PG
+30|Star Wars Episode IV A New Hope|Space Opera|02:01:19|PG
+31|Spirited Away|Fantasy Animation|02:04:41|PG
+32|The Pianist|War Drama|02:30:08|R
+33|Gladiator|Action Epic|02:35:27|R
+34|Parasite|Dark Comedy|02:12:55|R
+35|Kill Bill The Whole Bloody Affair|Action Thriller|04:13:14|Not Rated
+36|Grave of the Fireflies|War Animation|01:28:36|Not Rated
+37|Psycho|Psychological Thriller|01:49:02|R
+38|The Lion King|Animation Musical|01:28:49|G
+39|Harakiri|Samurai Drama|02:13:21|Not Rated
+40|The Departed|Crime Thriller|02:31:58|R
+41|Whiplash|Psychological Drama|01:46:37|R
+42|The Prestige|Mystery Thriller|02:10:16|PG-13
+43|American History X|Crime Drama|01:59:43|R
+44|Leon The Professional|Action Thriller|01:50:29|R
+45|Spider Man Across the Spider Verse|Animation Action|02:20:11|PG
+46|Cinema Paradiso|Drama|02:54:04|PG
+47|Casablanca|Romance Drama|01:42:53|PG
+48|The Intouchables|Comedy Drama|01:52:46|R
+49|The Usual Suspects|Crime Thriller|01:46:07|R
+50|Django Unchained|Western|02:45:39|R
