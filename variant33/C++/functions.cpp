@@ -1,5 +1,33 @@
 #include "functions.h"
 
+static bool patternFilm(const Films& f) {
+    if (f.id <= 0) return false;
+    if (f.name.empty() || f.genre.empty() || f.duration.empty() || f.agelimit.empty()) return false;
+
+    static const vector<string> allowedRatings = {"G", "PG", "PG-13", "R", "NC-17"};
+    bool ratingOk = false;
+    for (const auto& r : allowedRatings) {
+        if (f.agelimit == r) {
+            ratingOk = true;
+            break;
+        }
+    }
+    if (!ratingOk) return false;
+
+    return true;
+}
+
+static bool patternSession(const Sessions& s) {
+    if (s.sid <= 0 || s.filmId <= 0 || s.hallId <= 0 || s.price <= 0) return false;
+
+    static const regex datePattern(R"(^\d{4}-\d{2}-\d{2}$)");
+    static const regex timePattern(R"(^([01]\d|2[0-3]):[0-5]\d$)");
+    if (!regex_match(s.date, datePattern)) return false;
+    if (!regex_match(s.time, timePattern)) return false;
+
+    return true;
+}
+
 // запись
 vector<Films> loadFilms() {
     vector<Films> films;
@@ -86,12 +114,19 @@ void printSessions(const vector<Sessions>& sessions) {
 // добавление
 void addFilm(vector<Films>& films) {
     Films f;
+    cout << "Формат: Айди(число) | Название(текст) | Жанр(текст) | Длительность(текст) | Рейтинг(G, PG, PG-13, R, NC-17)\n";
     cout << "Айди: "; cin >> f.id;
     cin.ignore();     
     cout << "Название: ";     getline(cin, f.name);
     cout << "Жанр: ";    getline(cin, f.genre);
     cout << "Длительность: "; getline(cin, f.duration);
     cout << "Возрастной рейтинг: "; getline(cin, f.agelimit);
+
+    if (!patternFilm(f)) {
+        cout << "Не добавлено: ошибка в формате.\n";
+        return;
+    }
+
     films.push_back(f);
     saveFilms(films);
     cout << "Успешно: фильм добавлен.\n";
@@ -99,6 +134,7 @@ void addFilm(vector<Films>& films) {
 
 void addSession(vector<Sessions>& sessions) {
     Sessions s;
+    cout << "Формат: Айди сессии(число) | Айди фильма(число) | Дата(YYYY-MM-DD) | Время(HH:MM) | Номер зала(число) | Цена(число)\n";
     cout << "Айди сессии: ";     cin >> s.sid;
     cout << "Айди фильма: "; cin >> s.filmId;
     cin.ignore();
@@ -106,6 +142,12 @@ void addSession(vector<Sessions>& sessions) {
     cout << "Время: ";    getline(cin, s.time);
     cout << "Номер зала: "; cin >> s.hallId;
     cout << "Цена: ";   cin >> s.price;
+
+    if (!patternSession(s)) {
+        cout << "Не добавлено: ошибка в формате.\n";
+        return;
+    }
+
     sessions.push_back(s);
     saveSessions(sessions);
     cout << "Успешно: сессия добавлена.\n";
@@ -155,12 +197,21 @@ void editFilm(vector<Films>& films) {
     for (auto& f : films) {
         if (f.name == name) {
             found = true;
-            cout << "Новый айди: "; cin >> f.id;
+            Films updated = f;
+            cout << "Формат: Айди(число) | Жанр(текст) | Длительность(текст) | Рейтинг(G, PG, PG-13, R, NC-17)\n";
+            cout << "Название не меняется: " << updated.name << "\n";
+            cout << "Новый айди: "; cin >> updated.id;
             cin.ignore();
-            cout << "Новое название: ";     getline(cin, f.name);
-            cout << "Новый жанр: ";    getline(cin, f.genre);
-            cout << "Новая длительность: "; getline(cin, f.duration);
-            cout << "Новый возрастной рейтинг: "; getline(cin, f.agelimit);
+            cout << "Новый жанр: ";    getline(cin, updated.genre);
+            cout << "Новая длительность: "; getline(cin, updated.duration);
+            cout << "Новый возрастной рейтинг: "; getline(cin, updated.agelimit);
+
+            if (!patternFilm(updated)) {
+                cout << "Не обновлено: ошибка в формате.\n";
+                return;
+            }
+
+            f = updated;
             break;
         }
     }
@@ -180,13 +231,22 @@ void editSession(vector<Sessions>& sessions) {
     for (auto& s : sessions) {
         if (s.sid == sid) {
             found = true;
-            cout << "Новый айди сессии: ";     cin >> s.sid;
-            cout << "Новый айди фильма: "; cin >> s.filmId;
+            Sessions updated = s;
+            cout << "Формат: Айди фильма(число) | Дата(YYYY-MM-DD) | Время(HH:MM) | Номер зала(число) | Цена(число)\n";
+            cout << "Айди сессии не меняется: " << updated.sid << "\n";
+            cout << "Новый айди фильма: "; cin >> updated.filmId;
             cin.ignore();
-            cout << "Новая дата: ";    getline(cin, s.date);
-            cout << "Новое время: ";    getline(cin, s.time);
-            cout << "Новый номер зала: "; cin >> s.hallId;
-            cout << "Новая цена: ";   cin >> s.price;
+            cout << "Новая дата: ";    getline(cin, updated.date);
+            cout << "Новое время: ";    getline(cin, updated.time);
+            cout << "Новый номер зала: "; cin >> updated.hallId;
+            cout << "Новая цена: ";   cin >> updated.price;
+
+            if (!patternSession(updated)) {
+                cout << "Не обновлено: ошибка в формате.\n";
+                return;
+            }
+
+            s = updated;
             break;
         }
     }
