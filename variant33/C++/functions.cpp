@@ -86,100 +86,116 @@ void printSessions(const vector<Sessions>& sessions) {
 // добавление
 void addFilm(vector<Films>& films) {
     Films f;
-    cout << "ID: "; cin >> f.id;
+    cout << "Айди: "; cin >> f.id;
     cin.ignore();                                      // сбросить '\n' после cin >>
-    cout << "Name: ";     getline(cin, f.name);
-    cout << "Genre: ";    getline(cin, f.genre);
-    cout << "Duration: "; getline(cin, f.duration);
-    cout << "Age limit: "; getline(cin, f.agelimit);
+    cout << "Название: ";     getline(cin, f.name);
+    cout << "Жанр: ";    getline(cin, f.genre);
+    cout << "Длительность: "; getline(cin, f.duration);
+    cout << "Возрастной рейтинг: "; getline(cin, f.agelimit);
     films.push_back(f);
     saveFilms(films);
+    cout << "Успешно: фильм добавлен.\n";
 }
 
 void addSession(vector<Sessions>& sessions) {
     Sessions s;
-    cout << "SID: ";     cin >> s.sid;
-    cout << "Film ID: "; cin >> s.filmId;
+    cout << "Айди сессии: ";     cin >> s.sid;
+    cout << "Айди фильма: "; cin >> s.filmId;
     cin.ignore();
-    cout << "Date: ";    getline(cin, s.date);
-    cout << "Time: ";    getline(cin, s.time);
-    cout << "Hall ID: "; cin >> s.hallId;
-    cout << "Price: ";   cin >> s.price;
+    cout << "Дата: ";    getline(cin, s.date);
+    cout << "Время: ";    getline(cin, s.time);
+    cout << "Номер зала: "; cin >> s.hallId;
+    cout << "Цена: ";   cin >> s.price;
     sessions.push_back(s);
     saveSessions(sessions);
+    cout << "Успешно: сессия добавлена.\n";
 }
 
 // удаление
 void deleteFilm(vector<Films>& films) {
     string name;
-    cout << "Film name: ";
+    cout << "Название фильма: ";
     cin.ignore();                                      // ключевой фикс
     getline(cin, name);                                // теперь читает "The Usual Suspects" целиком
 
     for (int i = 0; i < (int)films.size(); i++) {
         if (films[i].name == name) {
             films.erase(films.begin() + i);
-            cout << "Фильм удалён.\n";
+            cout << "Успешно: фильм удалён.\n";
             saveFilms(films);
             return;
         }
     }
-    cout << "Фильм не найден.\n";
+    cout << "Не успешно: фильм не найден.\n";
 }
 
 void deleteSession(vector<Sessions>& sessions) {
     int sid;
-    cout << "Session ID: "; cin >> sid;
+    cout << "Айди сессии: "; cin >> sid;
 
     for (int i = 0; i < (int)sessions.size(); i++) {
         if (sessions[i].sid == sid) {
             sessions.erase(sessions.begin() + i);
-            cout << "Сессия удалена.\n";
+            cout << "Успешно: сессия удалена.\n";
             saveSessions(sessions);
             return;
         }
     }
-    cout << "Сессия не найдена.\n";
+    cout << "Не успешно: сессия не найдена.\n";
 }
 
 // редактирование
 void editFilm(vector<Films>& films) {
     string name;
-    cout << "Film name: ";
+    cout << "Название фильма: ";
     cin.ignore();
     getline(cin, name);
 
+    bool found = false;
     for (auto& f : films) {
         if (f.name == name) {
-            cout << "New ID: "; cin >> f.id;
+            found = true;
+            cout << "Новый айди: "; cin >> f.id;
             cin.ignore();
-            cout << "New name: ";     getline(cin, f.name);
-            cout << "New genre: ";    getline(cin, f.genre);
-            cout << "New duration: "; getline(cin, f.duration);
-            cout << "New age limit: "; getline(cin, f.agelimit);
+            cout << "Новое название: ";     getline(cin, f.name);
+            cout << "Новый жанр: ";    getline(cin, f.genre);
+            cout << "Новая длительность: "; getline(cin, f.duration);
+            cout << "Новый возрастной рейтинг: "; getline(cin, f.agelimit);
             break;
         }
     }
-    saveFilms(films);
+    if (found) {
+        saveFilms(films);
+        cout << "Успешно: фильм обновлён.\n";
+    } else {
+        cout << "Не успешно: фильм не найден.\n";
+    }
 }
 
 void editSession(vector<Sessions>& sessions) {
     int sid;
-    cout << "Session ID: "; cin >> sid;
+    cout << "Айди сессии: "; cin >> sid;
 
+    bool found = false;
     for (auto& s : sessions) {
         if (s.sid == sid) {
-            cout << "New SID: ";     cin >> s.sid;
-            cout << "New Film ID: "; cin >> s.filmId;
+            found = true;
+            cout << "Новый айди сессии: ";     cin >> s.sid;
+            cout << "Новый айди фильма: "; cin >> s.filmId;
             cin.ignore();
-            cout << "New date: ";    getline(cin, s.date);
-            cout << "New time: ";    getline(cin, s.time);
-            cout << "New hall ID: "; cin >> s.hallId;
-            cout << "New price: ";   cin >> s.price;
+            cout << "Новая дата: ";    getline(cin, s.date);
+            cout << "Новое время: ";    getline(cin, s.time);
+            cout << "Новый номер зала: "; cin >> s.hallId;
+            cout << "Новая цена: ";   cin >> s.price;
             break;
         }
     }
-    saveSessions(sessions);
+    if (found) {
+        saveSessions(sessions);
+        cout << "Успешно: сессия обновлена.\n";
+    } else {
+        cout << "Не успешно: сессия не найдена.\n";
+    }
 }
 
 // иное
@@ -197,7 +213,7 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
     }
 
     if (todaySessions.empty()) {
-        cout << "Не найдено сессии на указанную Дату." << date << "\n";
+        cout << "Не успешно: не найдено сессий на указанную дату " << date << ".\n";
         return;
     }
 
@@ -219,7 +235,7 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
         }
     }
 
-    cout << "today.txt создан коректно!\n";
+    cout << "Успешно: today.txt создан корректно.\n";
 }
 
 void sortPrint(const vector<Films>& films) {
@@ -239,9 +255,19 @@ void sortPrint(const vector<Films>& films) {
 }
 
 static bool postActionMenu() {
-    cout << "\n--- Что дальше? ---\n1 Вернуться в меню\n0 Выход\n> ";
-    int c; cin >> c;
-    return c != 0;
+    while (true) {
+        cout << "\n--- Что дальше? ---\n1 Вернуться в меню\n0 Выход\n> ";
+        int c;
+        if (!(cin >> c)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Неверное значение. Введите только 1 или 0.\n";
+            continue;
+        }
+        if (c == 1) return true;
+        if (c == 0) return false;
+        cout << "Неверное значение. Введите только 1 или 0.\n";
+    }
 }
 
 void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
@@ -250,8 +276,6 @@ void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
         cout << "\n1 Список фильмов\n2 Список сессий\n3 Добавить фильм\n4 Добавить сессию\n"
              << "5 Удалить фильм\n6 Удалить сессию\n7 Редактировать фильмы\n8 Редактировать сессии\n"
              << "9 Создать today.txt\n10 Сортировка фильмов\n0 Выход\n> ";
-        cin >> choice;
-
         if (!(cin >> choice)) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
