@@ -87,7 +87,7 @@ void printSessions(const vector<Sessions>& sessions) {
 void addFilm(vector<Films>& films) {
     Films f;
     cout << "Айди: "; cin >> f.id;
-    cin.ignore();                                      // сбросить '\n' после cin >>
+    cin.ignore();     
     cout << "Название: ";     getline(cin, f.name);
     cout << "Жанр: ";    getline(cin, f.genre);
     cout << "Длительность: "; getline(cin, f.duration);
@@ -115,8 +115,8 @@ void addSession(vector<Sessions>& sessions) {
 void deleteFilm(vector<Films>& films) {
     string name;
     cout << "Название фильма: ";
-    cin.ignore();                                      // ключевой фикс
-    getline(cin, name);                                // теперь читает "The Usual Suspects" целиком
+    cin.ignore();
+    getline(cin, name);
 
     for (int i = 0; i < (int)films.size(); i++) {
         if (films[i].name == name) {
@@ -204,7 +204,7 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
     cout << "Введите дату (YYYY-MM-DD): ";
     cin >> date;
 
-    // Найти сессии на указанную дату
+    
     vector<Sessions> todaySessions;
     for (const auto& s : sessions) {
         if (s.date == date) {
@@ -224,7 +224,6 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
     file << "Время | Название | Жанр | Длительность | Рейтинг | Номер зала | Цена" << "\n";
     file << string(50, '-') << "\n" << "\n";
     for (const auto& s : todaySessions) {
-        // Найти фильм по filmId
         for (const auto& f : films) {
             if (f.id == s.filmId) {
                 file << s.time << " | " << f.name << " | " << f.genre << " | " 
