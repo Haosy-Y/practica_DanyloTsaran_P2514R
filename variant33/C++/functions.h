@@ -35,12 +35,15 @@ void printFilms(const vector<Films>& films);
 void printSessions(const vector<Sessions>& sessions);
 
 void addFilm(vector<Films>& films);
-void addSession(vector<Sessions>& sessions);
+void addSession(vector<Sessions>& sessions, const vector<Films>& films);
 
 void deleteFilm(vector<Films>& films);
 void deleteSession(vector<Sessions>& sessions);
 
 void editFilm(vector<Films>& films);
-void editSession(vector<Sessions>& sessions);
+void editSession(vector<Sessions>& sessions, const vector<Films>& films);
+
+void createTodayFile(const vector<Films>& films, const vector<Sessions>& sessions);
+void sortPrint(const vector<Films>& films);
 
 #endif
