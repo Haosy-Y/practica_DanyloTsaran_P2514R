@@ -48,4 +48,3 @@
 48|The Intouchables|Comedy Drama|01:52:46|R
 49|The Usual Suspects|Crime Thriller|01:46:07|R
 50|Django Unchained|Western|02:45:39|R
-1|к|к|к|R

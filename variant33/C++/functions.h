@@ -36,5 +36,7 @@ void editFilm(vector<Films>& films);
 void editSession(vector<Sessions>& sessions, const vector<Films>& films);
 void createTodayFile(const vector<Films>& films, const vector<Sessions>& sessions);
 void sortPrint(const vector<Films>& films);
+void printMostPopularGenre(const vector<Films>& films, const vector<Sessions>& sessions);
+void printAverageTicketForGenre(const vector<Films>& films, const vector<Sessions>& sessions);
 
 #endif
