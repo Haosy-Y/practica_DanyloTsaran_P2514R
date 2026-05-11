@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-#include "functions.h"
+#include "menu.h"
+
 using namespace std;
 
 int main() {

@@ -24,8 +24,6 @@ struct Sessions {
 vector<Films> loadFilms();
 vector<Sessions> loadSessions();
 void saveFilms(const vector<Films>& films);
-void saveSessions(const vector<Sessions>& sessions);
-void runMenu(vector<Films>& films, vector<Sessions>& sessions);
 void printFilms(const vector<Films>& films);
 void printSessions(const vector<Sessions>& sessions);
 void addFilm(vector<Films>& films);

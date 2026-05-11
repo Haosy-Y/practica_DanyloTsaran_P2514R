@@ -107,8 +107,9 @@ void printFilms(const vector<Films>& films) {
 }
 
 void printSessions(const vector<Sessions>& sessions) {
-    for (auto& s : sessions)
-        cout << s.sid << " " << s.filmId << " " << s.date << " " << s.time << " " << s.hallId << " " << s.price << "\n";
+    for (const auto& s : sessions)
+        cout << s.sid << " " << s.filmId << " " << s.date << " "
+             << s.time << " " << s.hallId << " " << s.price << "\n";
 }
 
 // добавление 3-4
@@ -132,22 +133,20 @@ void addFilm(vector<Films>& films) {
     cout << "Успешно: фильм добавлен.\n";
 }
 
-void addSession(vector<Sessions>& sessions) {
+void addSession(vector<Sessions>& sessions, const vector<Films>& films) {
     Sessions s;
-    cout << "Формат: Айди сессии(число) | Айди фильма(число) | Дата(YYYY-MM-DD) | Время(HH:MM) | Номер зала(число) | Цена(число)\n";
-    cout << "Айди сессии: ";     cin >> s.sid;
-    cout << "Айди фильма: "; cin >> s.filmId;
+    cout << "Айди сессии: ";  cin >> s.sid;
+    cout << "Айди фильма: ";  cin >> s.filmId;
     cin.ignore();
-    cout << "Дата: ";    getline(cin, s.date);
-    cout << "Время: ";    getline(cin, s.time);
-    cout << "Номер зала: "; cin >> s.hallId;
-    cout << "Цена: ";   cin >> s.price;
+    cout << "Дата: ";         getline(cin, s.date);
+    cout << "Время: ";        getline(cin, s.time);
+    cout << "Номер зала: ";   cin >> s.hallId;
+    cout << "Цена: ";         cin >> s.price;
 
     if (!patternSession(s)) {
         cout << "Не добавлено: ошибка в формате.\n";
         return;
     }
-
     sessions.push_back(s);
     saveSessions(sessions);
     cout << "Успешно: сессия добавлена.\n";
@@ -223,7 +222,7 @@ void editFilm(vector<Films>& films) {
     }
 }
 
-void editSession(vector<Sessions>& sessions) {
+void editSession(vector<Sessions>& sessions, const vector<Films>& films) {
     int sid;
     cout << "Айди сессии: "; cin >> sid;
 
@@ -371,54 +370,3 @@ void printAverageTicketForGenre(const vector<Films>& films, const vector<Session
     cout << "Средняя стоимость билета: " << ss.str() << "\n";
 }
 
-static bool postActionMenu() {
-    while (true) {
-        cout << "\n--- Что дальше? ---\n1 Вернуться в меню\n0 Выход\n> ";
-        int c;
-        if (!(cin >> c)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Неверное значение. Введите только 1 или 0.\n";
-            continue;
-        }
-        if (c == 1) return true;
-        if (c == 0) return false;
-        cout << "Неверное значение. Введите только 1 или 0.\n";
-    }
-}
-
-void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
-    int choice;
-    while (true) {
-        cout << "\n1 Список фильмов\n2 Список сессий\n3 Добавить фильм\n4 Добавить сессию\n"
-             << "5 Удалить фильм\n6 Удалить сессию\n7 Редактировать фильмы\n8 Редактировать сессии\n"
-             << "9 Создать today.txt\n10 Сортировка фильмов\n"
-             << "11 Самый популярный жанр (по сеансам)\n12 Средняя цена билета по жанру\n0 Выход\n> ";
-        if (!(cin >> choice)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "[!] Некорректный ввод. Введите число от 0 до 12.\n";
-            continue;
-        }
-
-        if (choice == 0) return;
-
-        switch (choice) {
-            case 1:  printFilms(films);               break;
-            case 2:  printSessions(sessions);         break;
-            case 3:  addFilm(films);                  break;
-            case 4:  addSession(sessions);            break;
-            case 5:  deleteFilm(films);               break;
-            case 6:  deleteSession(sessions);         break;
-            case 7:  editFilm(films);                 break;
-            case 8:  editSession(sessions);           break;
-            case 9:  createTodayFile(films, sessions); break;
-            case 10: sortPrint(films);                break;
-            case 11: printMostPopularGenre(films, sessions); break;
-            case 12: printAverageTicketForGenre(films, sessions); break;
-            default: cout << "Нету такого варианта\n"; continue;
-        }
-
-        if (!postActionMenu()) return;
-    }
-}
