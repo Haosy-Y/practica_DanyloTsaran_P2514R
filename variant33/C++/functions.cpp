@@ -29,7 +29,6 @@ static bool patternSession(const Sessions& s) {
     return true;
 }
 
-// запись 0
 vector<Films> loadFilms() {
     vector<Films> films;
     ifstream file("x-movie.txt");
@@ -75,7 +74,6 @@ vector<Sessions> loadSessions() {
     return sessions;
 }
 
-// сохранение 0
 void saveFilms(const vector<Films>& films) {
     ofstream file("x-movie.txt", ios::trunc);
 
@@ -101,19 +99,64 @@ void saveSessions(const vector<Sessions>& sessions) {
     }
 }
 
-// вывод 1-2
 void printFilms(const vector<Films>& films) {
-    for (auto& f : films)
-        cout << f.id << " " << f.name << " " << f.genre << " " << f.duration << " " << f.agelimit << "\n";
+    const int wId = 6, wName = 52, wGenre = 24, wDuration = 10, wRating = 10;
+    const int lineW = wId + wName + wGenre + wDuration + wRating;
+
+    cout << left
+         << setw(wId) << "ID"
+         << setw(wName) << "Name"
+         << setw(wGenre) << "Genre"
+         << setw(wDuration) << "Duration"
+         << setw(wRating) << "Rating" << "\n";
+    cout << string(lineW, '-') << "\n";
+
+    for (const auto& f : films) {
+        cout << left
+             << setw(wId) << f.id
+             << setw(wName) << f.name
+             << setw(wGenre) << f.genre
+             << setw(wDuration) << f.duration
+             << setw(wRating) << f.agelimit << "\n";
+    }
 }
 
 void printSessions(const vector<Sessions>& sessions) {
-    for (const auto& s : sessions)
-        cout << s.sid << " " << s.filmId << " " << s.date << " "
-             << s.time << " " << s.hallId << " " << s.price << "\n";
+    const int wSid = 8, wFilmId = 8, wDate = 12, wTime = 8, wHall = 5, wPrice = 8;
+    const int lineW = wSid + wFilmId + wDate + wTime + wHall + wPrice;
+
+    cout << left
+         << setw(wSid) << "SID"
+         << setw(wFilmId) << "FilmID"
+         << setw(wDate) << "Date"
+         << setw(wTime) << "Time"
+         << setw(wHall) << "Hall"
+         << setw(wPrice) << "Price" << "\n";
+    cout << string(lineW, '-') << "\n";
+
+    for (const auto& s : sessions) {
+        cout << left
+             << setw(wSid) << s.sid
+             << setw(wFilmId) << s.filmId
+             << setw(wDate) << s.date
+             << setw(wTime) << s.time
+             << setw(wHall) << s.hallId
+             << setw(wPrice) << s.price << "\n";
+    }
 }
 
-// добавление 3-4
+void printListings(int kind, const vector<Films>& films, const vector<Sessions>& sessions) {
+    if (kind == 1) {
+        printFilms(films);
+        return;
+    }
+    if (kind == 2) {
+        printSessions(sessions);
+        return;
+    }
+    cout << RED "Неверный тип списка для вывода.\n" RESET;
+}
+
 void addFilm(vector<Films>& films) {
     Films f;
     cout << "Формат: Айди(число) | Название(текст) | Жанр(текст) | Длительность(текст) | Рейтинг(G, PG, PG-13, R, NC-17)\n";
@@ -128,6 +171,12 @@ void addFilm(vector<Films>& films) {
         cout << RED "Не добавлено: ошибка в формате.\n" RESET;
         return;
     }
+
+    for (const auto& ex : films)
+        if (ex.id == f.id) {
+            cout << RED "Не добавлено: фильм с таким ID уже существует.\n" RESET;
+            return;
+        }
 
     films.push_back(f);
     saveFilms(films);
@@ -148,12 +197,17 @@ void addSession(vector<Sessions>& sessions, const vector<Films>& films) {
         cout << RED "Не добавлено: ошибка в формате.\n" RESET;
         return;
     }
+
+    for (const auto& ex : sessions)
+        if (ex.sid == s.sid) {
+            cout << RED "Не добавлено: сессия с таким ID уже существует.\n" RESET;
+            return;
+        }
     sessions.push_back(s);
     saveSessions(sessions);
-    cout << GREEN "Успешно: сессия добавлен.\n" RESET;
+    cout << GREEN "Успешно: сессия добавлена.\n" RESET;
 }
 
-// удаление 5-6
 void deleteFilm(vector<Films>& films) {
     string name;
     cout << "Название фильма: ";
@@ -186,7 +240,6 @@ void deleteSession(vector<Sessions>& sessions) {
     cout << RED "Не успешно: сессия не найдена.\n" RESET;
 }
 
-// редактирование 7-8
 void editFilm(vector<Films>& films) {
     string name;
     cout << "Название фильма: ";
@@ -258,13 +311,11 @@ void editSession(vector<Sessions>& sessions, const vector<Films>& films) {
     }
 }
 
-// иное 9-12
 void createTodayFile(const vector<Films>& films, const vector<Sessions>& sessions) {
     string date;
     cout << "Введите дату (YYYY-MM-DD): ";
     cin >> date;
 
-    
     vector<Sessions> todaySessions;
     for (const auto& s : sessions) {
         if (s.date == date) {
@@ -277,40 +328,95 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
         return;
     }
 
-    ofstream file("today.txt");
-    file << "Фильмы в данную дату : " << date << ":\n";
-    file << string(50, '-') << "\n";
-    file << "Данные указаны в таком формате : " << ":\n";
-    file << "Время | Название | Жанр | Длительность | Рейтинг | Номер зала | Цена" << "\n";
-    file << string(50, '-') << "\n" << "\n";
+    ofstream file("today.txt", ios::trunc);
+    int written = 0;
+    struct TodayRow {
+        string time;
+        string name;
+        string genre;
+        string duration;
+        string rating;
+        int hallId;
+        int price;
+    };
+    vector<TodayRow> consoleRows;
     for (const auto& s : todaySessions) {
         for (const auto& f : films) {
             if (f.id == s.filmId) {
-                file << s.time << " | " << f.name << " | " << f.genre << " | " 
-                << f.duration << " | " << f.agelimit << " | " << s.hallId << " | " 
-                << s.price << "\n" << string(50, '-') << "\n";
+                file << s.time << "|"
+                     << f.name << "|"
+                     << f.genre << "|"
+                     << f.duration << "|"
+                     << f.agelimit << "|"
+                     << s.hallId << "|"
+                     << s.price << "\n";
+                consoleRows.push_back({s.time, f.name, f.genre, f.duration, f.agelimit, s.hallId, s.price});
+                written++;
                 break;
             }
         }
     }
+    file.close();
 
-    cout << GREEN "Успешно: today.txt создан корректно.\n" RESET;
+    cout << GREEN "Успешно: файл today.txt создан.\n" RESET;
+    if (written == 0) {
+        cout << RED "На эту дату сеансы есть, но ни один не связан с фильмом по id.\n" RESET;
+        return;
+    }
+    const int wTime = 8, wName = 52, wGenre = 24, wDuration = 10, wRating = 10, wHall = 5, wPrice = 8;
+    const int lineW = wTime + wName + wGenre + wDuration + wRating + wHall + wPrice;
+
+    cout << BLUE "Сеансы на дату " << date << ":\n" RESET;
+    cout << left
+         << setw(wTime) << "Time"
+         << setw(wName) << "Name"
+         << setw(wGenre) << "Genre"
+         << setw(wDuration) << "Duration"
+         << setw(wRating) << "Rating"
+         << setw(wHall) << "Hall"
+         << setw(wPrice) << "Price" << "\n";
+    cout << string(lineW, '-') << "\n";
+
+    for (const auto& row : consoleRows) {
+        cout << left
+             << setw(wTime) << row.time
+             << setw(wName) << row.name
+             << setw(wGenre) << row.genre
+             << setw(wDuration) << row.duration
+             << setw(wRating) << row.rating
+             << setw(wHall) << row.hallId
+             << setw(wPrice) << row.price << "\n";
+    }
 }
 
 void sortPrint(const vector<Films>& films) {
     vector<Films> tmp = films;
 
-    for (int i = 0; i < tmp.size() - 1; i++)
-        for (int j = 0; j < tmp.size() - i - 1; j++)
+    for (int i = 0; i < (int)tmp.size() - 1; i++)
+        for (int j = 0; j < (int)tmp.size() - i - 1; j++)
             if (tmp[j].name > tmp[j+1].name)
                 swap(tmp[j], tmp[j+1]);
 
-    cout << "\nФильмы в алфавитном порядке:\n";
-    for (const auto& f : tmp)
-        cout << f.name << " | " << f.id << " | " << f.genre << " | "
-             << f.duration << " | " << f.agelimit << "\n";
-    cout << "\nДанные указаны в таком формате : " << "\n";
-    cout << "Название | Айди  |  Жанр | Длительность | Возрастной рейтинг" << "\n";
+    const int wId = 6, wName = 52, wGenre = 24, wDuration = 10, wRating = 10;
+    const int lineW = wId + wName + wGenre + wDuration + wRating;
+
+    cout << BLUE "\nФильмы в алфавитном порядке:\n" RESET;
+    cout << left
+         << setw(wId) << "ID"
+         << setw(wName) << "Name"
+         << setw(wGenre) << "Genre"
+         << setw(wDuration) << "Duration"
+         << setw(wRating) << "Rating" << "\n";
+    cout << string(lineW, '-') << "\n";
+
+    for (const auto& f : tmp) {
+        cout << left
+             << setw(wId) << f.id
+             << setw(wName) << f.name
+             << setw(wGenre) << f.genre
+             << setw(wDuration) << f.duration
+             << setw(wRating) << f.agelimit << "\n";
+    }
 }
 
 static string genreByFilmId(const vector<Films>& films, int filmId) {

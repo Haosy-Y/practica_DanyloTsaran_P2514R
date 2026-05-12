@@ -20,7 +20,6 @@ struct Sessions {
     int price;
 };
 
-// 
 vector<Films> loadFilms();
 vector<Sessions> loadSessions();
 void saveFilms(const vector<Films>& films);

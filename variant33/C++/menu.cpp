@@ -1,30 +1,10 @@
 #include "functions.h"
 #include "menu.h"
 
-
-static bool postActionMenu() {
-    while (true) {
-        cout << "\n" BLUE "--- Что дальше? ---\n" RESET
-             << BLUE "[1]" RESET " Вернуться в меню\n"
-             << RED  "[0]" RESET " Выход\n"
-             << BLUE "> " RESET;
-        int c;
-        if (!(cin >> c)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << RED "[!] Введите 1 или 0\n" RESET;
-            continue;
-        }
-        if (c == 1) return true;
-        if (c == 0) return false;
-        cout << RED "[!] Введите 1 или 0\n" RESET;
-    }
-}
-
 void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
     int choice;
     while (true) {
-        cout << "\n"
+        cout << "\n" BLUE "=== Меню программы ===\n" RESET
              << BLUE   "[1]"  RESET " Список фильмов\n"
              << BLUE   "[2]"  RESET " Список сеансов\n"
              << GREEN  "[3]"  RESET " Добавить фильм\n"
@@ -33,8 +13,8 @@ void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
              << RED    "[6]"  RESET " Удалить сеанс\n"
              << YELLOW "[7]"  RESET " Редактировать фильмы\n"
              << YELLOW "[8]"  RESET " Редактировать сеансы\n"
-             << BLUE   "[9]"  RESET " Создать today.txt\n"
-             << BLUE   "[10]" RESET " Сортировка фильмов\n"
+             << BLUE   "[9]"  RESET " Создать файл и вывести его\n"
+             << BLUE   "[10]" RESET " Сортировать фильмы по алфавиту\n"
              << BLUE   "[11]" RESET " Самый популярный жанр\n"
              << BLUE   "[12]" RESET " Средняя цена по жанру\n"
              << RED    "[0]"  RESET " Выход\n"
@@ -66,7 +46,5 @@ void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
             case 12: printAverageTicketForGenre(films, sessions); break;
             default: cout << RED "Нету такого варианта\n" RESET;  continue;
         }
-
-        if (!postActionMenu()) return;
     }
 }

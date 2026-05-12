@@ -46,4 +46,3 @@
 46|Cinema Paradiso|Drama|02:54:04|PG
 49|The Usual Suspects|Crime Thriller|01:46:07|R
 50|Django Unchained|Western|02:45:39|R
-1|r|r|r|R
