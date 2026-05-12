@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "menu.h"
 
 static bool patternFilm(const Films& f) {
     if (f.id <= 0) return false;
@@ -124,13 +125,13 @@ void addFilm(vector<Films>& films) {
     cout << "Возрастной рейтинг: "; getline(cin, f.agelimit);
 
     if (!patternFilm(f)) {
-        cout << "Не добавлено: ошибка в формате.\n";
+        cout << RED "Не добавлено: ошибка в формате.\n" RESET;
         return;
     }
 
     films.push_back(f);
     saveFilms(films);
-    cout << "Успешно: фильм добавлен.\n";
+    cout << GREEN "Успешно: фильм добавлен.\n" RESET;
 }
 
 void addSession(vector<Sessions>& sessions, const vector<Films>& films) {
@@ -144,12 +145,12 @@ void addSession(vector<Sessions>& sessions, const vector<Films>& films) {
     cout << "Цена: ";         cin >> s.price;
 
     if (!patternSession(s)) {
-        cout << "Не добавлено: ошибка в формате.\n";
+        cout << RED "Не добавлено: ошибка в формате.\n" RESET;
         return;
     }
     sessions.push_back(s);
     saveSessions(sessions);
-    cout << "Успешно: сессия добавлена.\n";
+    cout << GREEN "Успешно: сессия добавлен.\n" RESET;
 }
 
 // удаление 5-6
@@ -162,12 +163,12 @@ void deleteFilm(vector<Films>& films) {
     for (int i = 0; i < (int)films.size(); i++) {
         if (films[i].name == name) {
             films.erase(films.begin() + i);
-            cout << "Успешно: фильм удалён.\n";
+            cout << GREEN "Успешно: фильм удалён.\n" RESET;
             saveFilms(films);
             return;
         }
     }
-    cout << "Не успешно: фильм не найден.\n";
+    cout << RED "Не успешно: фильм не найден.\n" RESET;
 }
 
 void deleteSession(vector<Sessions>& sessions) {
@@ -177,12 +178,12 @@ void deleteSession(vector<Sessions>& sessions) {
     for (int i = 0; i < (int)sessions.size(); i++) {
         if (sessions[i].sid == sid) {
             sessions.erase(sessions.begin() + i);
-            cout << "Успешно: сессия удалена.\n";
+            cout << GREEN "Успешно: сессия удалена.\n" RESET;
             saveSessions(sessions);
             return;
         }
     }
-    cout << "Не успешно: сессия не найдена.\n";
+    cout << RED "Не успешно: сессия не найдена.\n" RESET;
 }
 
 // редактирование 7-8
@@ -206,7 +207,7 @@ void editFilm(vector<Films>& films) {
             cout << "Новый возрастной рейтинг: "; getline(cin, updated.agelimit);
 
             if (!patternFilm(updated)) {
-                cout << "Не обновлено: ошибка в формате.\n";
+                cout << RED "Не обновлено: ошибка в формате.\n" RESET;
                 return;
             }
 
@@ -216,9 +217,9 @@ void editFilm(vector<Films>& films) {
     }
     if (found) {
         saveFilms(films);
-        cout << "Успешно: фильм обновлён.\n";
+        cout << GREEN "Успешно: фильм обновлён.\n" RESET;
     } else {
-        cout << "Не успешно: фильм не найден.\n";
+        cout << RED "Не успешно: фильм не найден.\n" RESET;
     }
 }
 
@@ -241,7 +242,7 @@ void editSession(vector<Sessions>& sessions, const vector<Films>& films) {
             cout << "Новая цена: ";   cin >> updated.price;
 
             if (!patternSession(updated)) {
-                cout << "Не обновлено: ошибка в формате.\n";
+                cout << RED "Не обновлено: ошибка в формате.\n" RESET;
                 return;
             }
 
@@ -251,9 +252,9 @@ void editSession(vector<Sessions>& sessions, const vector<Films>& films) {
     }
     if (found) {
         saveSessions(sessions);
-        cout << "Успешно: сессия обновлена.\n";
+        cout << GREEN "Успешно: сессия обновлена.\n" RESET;
     } else {
-        cout << "Не успешно: сессия не найдена.\n";
+        cout << RED "Не успешно: сессия не найдена.\n" RESET;
     }
 }
 
@@ -272,7 +273,7 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
     }
 
     if (todaySessions.empty()) {
-        cout << "Не успешно: не найдено сессий на указанную дату " << date << ".\n";
+        cout << RED "Не успешно: не найдено сессий на указанную дату " << date << ".\n" RESET;
         return;
     }
 
@@ -293,7 +294,7 @@ void createTodayFile(const vector<Films>& films, const vector<Sessions>& session
         }
     }
 
-    cout << "Успешно: today.txt создан корректно.\n";
+    cout << GREEN "Успешно: today.txt создан корректно.\n" RESET;
 }
 
 void sortPrint(const vector<Films>& films) {
@@ -329,7 +330,7 @@ void printMostPopularGenre(const vector<Films>& films, const vector<Sessions>& s
     }
 
     if (sessionsPerGenre.empty()) {
-        cout << "Нет данных: нет сеансов или не найдены фильмы по id.\n";
+        cout << RED "Нет данных: нет сеансов или не найдены фильмы по id.\n" RESET;
         return;
     }
 
@@ -338,7 +339,7 @@ void printMostPopularGenre(const vector<Films>& films, const vector<Sessions>& s
         if (p.second > best)
             best = p.second;
 
-    cout << "Самый популярный жанр по числу сеансов: максимум " << best << " сеанс(ов).\n";
+    cout << GREEN "Самый популярный жанр по числу сеансов: максимум " << best << " сеанс(ов).\n" RESET;
     for (const auto& p : sessionsPerGenre) {
         if (p.second == best)
             cout << "  " << p.first << " — " << p.second << "\n";
@@ -361,12 +362,12 @@ void printAverageTicketForGenre(const vector<Films>& films, const vector<Session
     }
 
     if (n == 0) {
-        cout << "Нет сеансов для жанра \"" << genre << "\".\n";
+        cout << RED "Нет сеансов для жанра \"" << genre << "\".\n" RESET;
         return;
     }
 
     stringstream ss;
     ss << fixed << setprecision(2) << (double)sum / n;
-    cout << "Средняя стоимость билета: " << ss.str() << "\n";
+    cout << GREEN "Средняя стоимость билета: " << ss.str() << "\n" RESET;
 }
 

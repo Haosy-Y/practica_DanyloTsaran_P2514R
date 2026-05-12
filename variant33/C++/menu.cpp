@@ -50,8 +50,10 @@ void runMenu(vector<Films>& films, vector<Sessions>& sessions) {
         if (choice == 0) return;
 
         switch (choice) {
-            case 1:  printFilms(films);                           break;
-            case 2:  printSessions(sessions);                     break;
+            case 1:
+            case 2:
+                printListings(choice, films, sessions);
+                break;
             case 3:  addFilm(films);                              break;
             case 4:  addSession(sessions, films);                        break;
             case 5:  deleteFilm(films);                           break;

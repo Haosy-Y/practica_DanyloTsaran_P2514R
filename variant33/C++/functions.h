@@ -24,8 +24,7 @@ struct Sessions {
 vector<Films> loadFilms();
 vector<Sessions> loadSessions();
 void saveFilms(const vector<Films>& films);
-void printFilms(const vector<Films>& films);
-void printSessions(const vector<Sessions>& sessions);
+void printListings(int kind, const vector<Films>& films, const vector<Sessions>& sessions);
 void addFilm(vector<Films>& films);
 void addSession(vector<Sessions>& sessions, const vector<Films>& films);
 void deleteFilm(vector<Films>& films);
